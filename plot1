@@ -1,0 +1,6 @@
+> powercomp <- read.table(file.choose(),header=T, sep=';')
+> powercomp$Date1 <-as.Date(strptime(powercomp$Date,"%d/%m/%Y"))
+> csc <- powercomp[powercomp$Date1 == "2007-02-01" | powercomp$Date1 == "2007-02-02",]
+> csc$Global_active_power1 <- as.numeric(as.character(csc$Global_active_power))
+> hist(csc$Global_active_power1,xlab="Global Active Power (Kilowats)",ylab='Frequency',main="Global Active Power", col="Red")
+> dev.copy(png, file="plot1.png")
