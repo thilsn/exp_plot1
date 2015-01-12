@@ -1,0 +1,11 @@
+powercomp <- read.table(file.choose(),header=T, sep=';')
+powercomp$Date1 <-as.Date(strptime(powercomp$Date,"%d/%m/%Y"))
+csc1 <- powercomp[powercomp$Date1 == "2007-02-01" | powercomp$Date1 == "2007-02-02",]
+csc1$Global1 <- as.numeric(as.character(csc$Global1))
+library(chron)
+csc1$Time1 <- chron(times=csc1$Time)
+csc1$DateTime <- as.POSIXct(paste(csc1$Date1, csc1$Time1))
+csc1$Weekday <-wday(csc$Date1, label = TRUE, abbr = TRUE)
+plot(csc1$DateTime, csc1$Global1, type="l", col="black", lwd=1, xlab="", ylab="Global Active Power (kilowats)")
+dev.copy(png, file="plot2.png")
+dev.off()
